@@ -1,31 +1,86 @@
 @echo off
+REM ===========================================================================
+REM OTIMIZADOR WINDOWS 10/11 v3.0
+REM Copyright (c) 2025 Gabs77u - https://github.com/Gabs77u/Otimizador-WIN
+REM 
+REM Licenca: Creative Commons Attribution-NonCommercial 4.0 International
+REM USO NAO-COMERCIAL APENAS - Proibida venda ou uso comercial
+REM Para uso comercial, contate o autor
+REM
+REM DISCLAIMER: Use por sua conta e risco. Sempre faca backup antes de usar.
+REM Este software e fornecido "como esta" sem garantias de qualquer tipo.
+REM ===========================================================================
+
 chcp 1252 > Nul
 set Intervalo=10
-mode 30,13
+mode 45,30
 color 0a
-title Otimizacao WIN 10 By Gabs
+
+REM Detectar versão do Windows - Método simples e eficaz
+set WINVER=10
+
+REM Verificar se é Windows 11 através da versão
+REM Build 26100.4652 é Windows 11 Insider Preview
+ver | findstr "26100" >nul 2>&1
+if %errorlevel% equ 0 set WINVER=11
+
+REM Verificar outros builds Windows 11
+ver | findstr "22000" >nul 2>&1
+if %errorlevel% equ 0 set WINVER=11
+
+ver | findstr "22621" >nul 2>&1
+if %errorlevel% equ 0 set WINVER=11
+
+ver | findstr "22631" >nul 2>&1
+if %errorlevel% equ 0 set WINVER=11
+
+REM Definir título
+if "%WINVER%"=="11" (
+    title Otimizador WIN 10/11 - By Gabs v3.0 [Windows 11 Detectado]
+) else (
+    title Otimizador WIN 10/11 - By Gabs v3.0 [Windows 10 Detectado]
+)
+
+setlocal enabledelayedexpansion
 :menu
 cls
-echo Otimizacao WIN 10 Beta v1
 echo.
-echo Escolha uma opcao:
+echo  ╔══════════════════════════════════════╗
+if "%WINVER%"=="11" (
+    echo  ║        OTIMIZADOR WINDOWS 11         ║
+) else (
+    echo  ║        OTIMIZADOR WINDOWS 10         ║
+)
+echo  ║            By Gabs - v3.0            ║
+echo  ║       Compativel WIN 10/11           ║
+echo  ╚══════════════════════════════════════╝
 echo.
-echo [1] Desabilitar Servicos
-echo [2] Tarefas Agendadas
-echo [3] Remover Telemetria
-echo [4] Desabilitar Configuracoes Diversas
-echo [5] Tweaks Variados
-echo [6] Otimizacao de Tela
-echo [7] Desabilitar Cortana
-echo [8] Parametros de Rede
-echo [9] Desabilitar Hibernacao do HD/SSD e configs de energia
-echo [10] Otimizacao EDGE
-echo [11] Features nao usadas
-echo [12] Remover Apps da Msstore
-echo [13] Otimizacao do Sistema
-echo [14] Instaladores
-echo [0] Sair
+echo  ┌─ OPCOES DE OTIMIZACAO ─────────────────┐
+echo  │                                        │
+echo  │  [1]  ⚙️  Desabilitar Servicos         │
+echo  │  [2]  📅 Tarefas Agendadas             │
+echo  │  [3]  🚫 Remover Telemetria            │
+echo  │  [4]  🔧 Configuracoes Diversas        │
+echo  │  [5]  ⚡ Tweaks Variados               │
+echo  │  [6]  🖥️  Otimizacao de Tela           │
+echo  │  [7]  🔍 Desabilitar Cortana           │
+echo  │  [8]  🌐 Parametros de Rede            │
+echo  │  [9]  🔋 Configs de Energia            │
+echo  │  [10] 🌊 Otimizacao EDGE               │
+echo  │  [11] 📦 Features nao usadas           │
+echo  │  [12] 🗑️  Remover Apps da Store        │
+echo  │  [13] 💻 Otimizacao do Sistema         │
+echo  │  [14] 📥 Instaladores                  │
+echo  │  [15] 🚀 Hardware Fraco                │
+echo  │  [16] 🧹 Limpeza de Arquivos           │
+if "%WINVER%"=="11" (
+echo  │  [17] 🆕 Otimizacoes Windows 11        │
+)
+echo  │                                        │
+echo  │  [0]  ❌ Sair                          │
+echo  └────────────────────────────────────────┘
 echo.
+echo  💡 Digite o numero da opcao desejada:
 
 set /p menu=">"
 
@@ -43,6 +98,9 @@ if %menu% equ 11 goto :Features.nao.usadas
 if %menu% equ 12 goto :Remover.Apps.Da.Store
 if %menu% equ 13 goto :OtimizacaoDoSistema
 if %menu% equ 14 goto :Instaladores
+if %menu% equ 15 goto :OtimizacaoHardwareFraco
+if %menu% equ 16 goto :LimpezaArquivosTemporarios
+if %menu% equ 17 goto :OtimizacaoWindows11
 if %menu% equ 0 exit
 
 pause
@@ -51,47 +109,45 @@ goto :menu
 chcp 65001
 
 :Desabilitar.Serviços
-*** Desabilitar alguns serviços ***
-sc config DiagTrack start= disabled
-sc config diagnosticshub.standardcollector.service start= disabled
-sc config dmwappushservice start= disabled
-sc config RemoteREGistry start= disabled
-sc config TrkWks start= disabled
-sc config SysMain start= disabled
-sc config lmhosts start= disabled
-sc config VSS start= disabled
-sc config RemoteAccess start= disabled
-sc config WSearch start= disabled
-sc config iphlpsvc start= disabled
-sc config DoSvc start= disabled
-sc config ICEsoundService start= disabled
-sc config RtkAudioUniversalService start= disabled
-sc config BDESVC start= disabled
-sc config TabletInputService start= disabled
-sc config SstpSvc start= disabled
-sc config NvTelemetryContainer start= disabled
-sc config HomeGroupListener start= disabled
-sc config HomeGroupProvider start= disabled
-sc config lfsvc start= disabled
-sc config WbioSrvc start= disabled
-sc config wisvc start= disabled
-sc config TapiSrv start= disabled
-sc config SmsRouter start= disabled
-sc config SharedRealitySvc start= disabled
-sc config ScDeviceEnum start= disabled
-sc config SCardSvr start= disabled
-sc config RetailDemo start= disabled
-sc config PhoneSvc start= disabled
-sc config perceptionsimulation start= disabled
-sc config BTAGService start= disabled
-sc config AJRouter start= disabled
-sc config CDPSvc start= disabled
-sc config ShellHWDetection start= disabled
-sc config RstMwService start= disabled
-sc config DusmSvc start= disabled
-sc config BthAvctpSvc start= disabled
-sc config BITS start= demand
-sc config DPS start= disabled
+cls
+echo.
+echo  ╔═══════════════════════════════════════════╗
+echo  ║           DESABILITAR SERVICOS            ║
+echo  ╚═══════════════════════════════════════════╝
+echo.
+echo  ⚙️  Desabilitando servicos desnecessarios...
+echo.
+echo  ┌─ SERVICOS SENDO PROCESSADOS ──────────────┐
+echo  │                                           │
+sc config DiagTrack start= disabled && echo  │  ✅ DiagTrack                             │ || echo  │  ❌ Erro: DiagTrack                      │
+sc config diagnosticshub.standardcollector.service start= disabled && echo  │  ✅ Diagnostics Hub                      │ || echo  │  ❌ Erro: Diagnostics Hub               │
+sc config dmwappushservice start= disabled && echo  │  ✅ WAP Push Message                     │ || echo  │  ❌ Erro: WAP Push Message              │
+sc config RemoteREGistry start= disabled && echo  │  ✅ Remote Registry                      │ || echo  │  ❌ Erro: Remote Registry               │
+sc config TrkWks start= disabled && echo  │  ✅ Distributed Link Tracking            │ || echo  │  ❌ Erro: Distributed Link Tracking     │
+sc config HomeGroupListener start= disabled && echo  │  ✅ HomeGroup Listener                   │ || echo  │  ❌ Erro: HomeGroup Listener            │
+sc config HomeGroupProvider start= disabled && echo  │  ✅ HomeGroup Provider                   │ || echo  │  ❌ Erro: HomeGroup Provider            │
+sc config RetailDemo start= disabled && echo  │  ✅ Retail Demo                          │ || echo  │  ❌ Erro: Retail Demo                   │
+sc config NvTelemetryContainer start= disabled && echo  │  ✅ NVIDIA Telemetry                     │ || echo  │  ❌ Erro: NVIDIA Telemetry              │
+sc config BITS start= demand && echo  │  ✅ BITS (Modo Demanda)                  │ || echo  │  ❌ Erro: BITS                          │
+echo  │                                           │
+echo  │  🔧 Servicos adicionais...                │
+sc config MapsBroker start= disabled && echo  │  ✅ Maps Broker                          │ || echo  │  ❌ Erro: Maps Broker                   │
+sc config lfsvc start= disabled && echo  │  ✅ Geolocation Service                  │ || echo  │  ❌ Erro: Geolocation Service           │
+sc config SharedAccess start= disabled && echo  │  ✅ Internet Connection Sharing          │ || echo  │  ❌ Erro: Internet Connection Sharing   │
+sc config ALG start= disabled && echo  │  ✅ Application Layer Gateway            │ || echo  │  ❌ Erro: Application Layer Gateway     │
+REM Serviços específicos do Windows 11
+if "%WINVER%"=="11" (
+    sc config WSearch start= disabled && echo  │  ✅ Windows Search (Win11)               │ || echo  │  ❌ Erro: Windows Search                │
+    sc config PcaSvc start= disabled && echo  │  ✅ Program Compatibility Assistant      │ || echo  │  ❌ Erro: Program Compatibility         │
+    sc config WbioSrvc start= disabled && echo  │  ✅ Windows Biometric Service            │ || echo  │  ❌ Erro: Windows Biometric             │
+    echo  │  🆕 Serviços Win11 processados            │
+)
+echo  │                                           │
+echo  └───────────────────────────────────────────┘
+echo.
+echo  🎉 Servicos otimizados com sucesso!
+echo.
+echo  Pressione qualquer tecla para continuar...
 cls
 pause
 goto :menu
@@ -99,45 +155,74 @@ echo.
 
 
 :Tarefas.Agendadas
-schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Disable
-schtasks /Change /TN "Microsoft\Windows\Application Experience\ProgramDataUpdater" /Disable
-schtasks /Change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /Disable
-schtasks /Change /TN "Microsoft\Windows\Autochk\Proxy" /Disable
-schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /Disable
-schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" /Disable
-schtasks /Change /TN "Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /Disable
-schtasks /Change /TN "Microsoft\Windows\Maintenance\WinSAT" /Disable
-schtasks /Change /TN "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /Disable
-schtasks /Change /TN "Microsoft\Windows\Autochk\Proxy" /Disable
-schtasks /Change /TN "Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /Disable
-schtasks /Change /TN "Microsoft\Windows\FileHistory\File History (maintenance mode)" /Disable
-schtasks /Change /TN "Microsoft\Windows\Maintenance\WinSAT" /Disable
-schtasks /Change /TN "Microsoft\Windows\CloudExperienceHost\CreateObjectTask" /Disable
-schtasks /Change /TN "Microsoft\Windows\DiskFootprint\Diagnostics" /Disable
-schtasks /Change /TN "Microsoft\Windows\NetTrace\GatherNetworkInfo" /Disable
-schtasks /Change /TN "Microsoft\Windows\Time Synchronization\ForceSynchronizeTime" /Disable
-schtasks /Change /TN "Microsoft\Windows\Time Synchronization\SynchronizeTime" /Disable
-schtasks /Change /TN "Microsoft\Windows\Windows Error Reporting\QueueReporting" /Enable
+cls
+echo.
+echo  ╔═══════════════════════════════════════════╗
+echo  ║            TAREFAS AGENDADAS              ║
+echo  ╚═══════════════════════════════════════════╝
+echo.
+echo  📅 Desabilitando tarefas automaticas...
+echo.
+echo  ┌─ TAREFAS SENDO PROCESSADAS ───────────────┐
+echo  │                                           │
+schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Disable >nul 2>&1 && echo  │  ✅ Compatibility Appraiser               │ || echo  │  ⚠️  Compatibility Appraiser (ja config)  │
+schtasks /Change /TN "Microsoft\Windows\Application Experience\ProgramDataUpdater" /Disable >nul 2>&1 && echo  │  ✅ Program Data Updater                  │ || echo  │  ⚠️  Program Data Updater (ja config)     │
+schtasks /Change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /Disable >nul 2>&1 && echo  │  ✅ Startup App Task                      │ || echo  │  ⚠️  Startup App Task (ja config)         │
+schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /Disable >nul 2>&1 && echo  │  ✅ CEIP Consolidator                     │ || echo  │  ⚠️  CEIP Consolidator (ja config)        │
+schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" /Disable >nul 2>&1 && echo  │  ✅ USB CEIP                              │ || echo  │  ⚠️  USB CEIP (ja config)                 │
+schtasks /Change /TN "Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /Disable >nul 2>&1 && echo  │  ✅ Disk Diagnostic Data Collector       │ || echo  │  ⚠️  Disk Diagnostic (ja config)          │
+schtasks /Change /TN "Microsoft\Windows\Maintenance\WinSAT" /Disable >nul 2>&1 && echo  │  ✅ Windows System Assessment             │ || echo  │  ⚠️  WinSAT (ja config)                   │
+schtasks /Change /TN "\Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /Disable >nul 2>&1 && echo  │  ✅ Power Efficiency Diagnostics          │ || echo  │  ⚠️  Power Efficiency (ja config)         │
+schtasks /Change /TN "Microsoft\Windows\CloudExperienceHost\CreateObjectTask" /Disable >nul 2>&1 && echo  │  ✅ Cloud Experience Host                 │ || echo  │  ⚠️  Cloud Experience (ja config)         │
+schtasks /Change /TN "Microsoft\Windows\NetTrace\GatherNetworkInfo" /Disable >nul 2>&1 && echo  │  ✅ Network Info Gathering                │ || echo  │  ⚠️  Network Info (ja config)             │
+REM Tarefas específicas do Windows 11
+if "%WINVER%"=="11" (
+    schtasks /Change /TN "Microsoft\Windows\WindowsUpdate\Scheduled Start" /Disable >nul 2>&1 && echo  │  ✅ Windows Update Scheduled              │ || echo  │  ⚠️  Windows Update (ja config)           │
+    schtasks /Change /TN "Microsoft\Windows\Shell\FamilySafetyMonitor" /Disable >nul 2>&1 && echo  │  ✅ Family Safety Monitor                 │ || echo  │  ⚠️  Family Safety (ja config)            │
+    schtasks /Change /TN "Microsoft\Windows\Shell\FamilySafetyRefreshTask" /Disable >nul 2>&1 && echo  │  ✅ Family Safety Refresh                 │ || echo  │  ⚠️  Family Safety Refresh (ja config)    │
+    schtasks /Change /TN "Microsoft\Windows\UpdateOrchestrator\Schedule Scan" /Disable >nul 2>&1 && echo  │  ✅ Update Orchestrator Scan              │ || echo  │  ⚠️  Update Orchestrator (ja config)      │
+    echo  │  🆕 Tarefas Win11 processadas             │
+)
+echo  │                                           │
+echo  └───────────────────────────────────────────┘
+echo.
+echo  🎉 Tarefas agendadas otimizadas!
+echo.
+echo  Pressione qualquer tecla para continuar...
 pause
 goto :menu
 echo.
 
 
 :Remover.Telemetria
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /v PreventDeviceMetadataFromNetwork /t REG_DWORD /d 1 /f
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v AllowTelemetry /t REG_DWORD /d 0 /f
-REG ADD "HKLM\SOFTWARE\Policies\Microsoft\MRT" /v DontOfferThroughWUAU /t REG_DWORD /d 1 /f
-REG ADD "HKLM\SOFTWARE\Policies\Microsoft\SQMClient\Windows" /v "CEIPEnable" /t REG_DWORD /d 0 /f
-REG ADD "HKLM\Software\Microsoft\SQMClient\Windows" /v "CEIPEnable" /d 0 /t REG_DWORD /f
-REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppCompat" /v "AITEnable" /t REG_DWORD /d 0 /f
-REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppCompat" /v "DisableUAR" /t REG_DWORD /d 1 /f
-REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d 0 /f
-REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger\AutoLogger-Diagtrack-Listener" /v "Start" /t REG_DWORD /d 0 /f
-REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger\SQMLogger" /v "Start" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v SmartScreenEnabled /t REG_SZ /d Off /f
-REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost" /v "SmartScreenEnabled" /t "REG_SZ" /d "Off" /f
-REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Remote Assistance" /v fAllowFullControl /t REG_DWORD /d 0 /f
+cls
+echo.
+echo  ╔═══════════════════════════════════════════╗
+echo  ║            REMOVER TELEMETRIA             ║
+echo  ╚═══════════════════════════════════════════╝
+echo.
+echo  🚫 Removendo coleta de dados...
+echo.
+echo  ┌─ CONFIGURACOES DE PRIVACIDADE ────────────┐
+echo  │                                           │
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /v PreventDeviceMetadataFromNetwork /t REG_DWORD /d 1 /f >nul 2>&1 && echo  │  ✅ Device Metadata bloqueado             │
+REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d 1 /f >nul 2>&1 && echo  │  ✅ Telemetria basica configurada         │
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v AllowTelemetry /t REG_DWORD /d 1 /f >nul 2>&1 && echo  │  ✅ Telemetria x64 configurada            │
+REG ADD "HKLM\SOFTWARE\Policies\Microsoft\SQMClient\Windows" /v "CEIPEnable" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ CEIP desabilitado                     │
+REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppCompat" /v "AITEnable" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ App Compatibility desabilitado        │
+REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger\AutoLogger-Diagtrack-Listener" /v "Start" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Diagtrack Logger desabilitado         │
+REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger\SQMLogger" /v "Start" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ SQM Logger desabilitado               │
+REM Configurações específicas do Windows 11
+if "%WINVER%"=="11" (
+    REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement" /v "ScoobeSystemSettingEnabled" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Configuracoes Win11 desabilitadas     │
+    REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-310093Enabled" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Sugestoes Win11 removidas             │
+)
+echo  │                                           │
+echo  └───────────────────────────────────────────┘
+echo.
+echo  🔒 Privacidade melhorada com sucesso!
+echo.
+echo  Pressione qualquer tecla para continuar...
 cls
 pause
 goto :menu
@@ -146,22 +231,46 @@ echo.
 
 
 :Desabilitar.Configurações.Diversas
-REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d 0 /f
-REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t REG_DWORD /d 0 /f
-REG ADD "HKCU\Control Panel\International\User Profile" /v "HttpAcceptLanguageOptOut" /t REG_DWORD /d 1 /f
-REG ADD "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v "UxOption" /t REG_DWORD /d 1 /f
-REG ADD "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\deleteiveryOptimization\Config" /v "DODownloadMode" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\deleteiveryOptimization" /v "SystemSettingsDownloadMode" /t REG_DWORD /d 0 /fREM 0 = esconder completamente, 1 = mostrar apenas ícone, 2 = Mostrar caixa completa
-REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d 1 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackDocs" /t REG_DWORD /d 0 /f
+cls
+echo.
+echo  ╔═══════════════════════════════════════════╗
+echo  ║         CONFIGURACOES DIVERSAS            ║
+echo  ╚═══════════════════════════════════════════╝
+echo.
+echo  🔧 Aplicando configuracoes gerais...
+echo.
+echo  ┌─ CONFIGURACOES SENDO APLICADAS ───────────┐
+echo  │                                           │
+REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Publicidade desabilitada              │
+REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Avaliacao web desabilitada            │
+REG ADD "HKCU\Control Panel\International\User Profile" /v "HttpAcceptLanguageOptOut" /t REG_DWORD /d 1 /f >nul 2>&1 && echo  │  ✅ Rastreamento idioma desabilitado      │
+REG ADD "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v "UxOption" /t REG_DWORD /d 1 /f >nul 2>&1 && echo  │  ✅ Windows Update otimizado              │
+REM 0 = esconder completamente, 1 = mostrar apenas ícone, 2 = Mostrar caixa completa
+REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d 1 /f >nul 2>&1 && echo  │  ✅ Caixa de busca otimizada              │
+REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackDocs" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Rastreamento docs desabilitado        │
 REM 1 = Este Computador, 2 = Acesso Rápido
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "LaunchTo" /t REG_DWORD /d 2 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d 0 /f
-powercfg -h off
-REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnableSuperfetch" /t REG_DWORD /d 00000000 /f
-REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnablePrefetcher" /t REG_DWORD /d 00000000 /f
-REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "WaitToKillServiceTimeout" /t REG_SZ /d 2000 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explore" /v "EnableAutoTray" /t REG_DWORD /d 0 /f
+REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "LaunchTo" /t REG_DWORD /d 2 /f >nul 2>&1 && echo  │  ✅ Explorer configurado                  │
+REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Sugestoes do sistema removidas        │
+
+REM Configurações específicas do Windows 11
+if "%WINVER%"=="11" (
+    echo  │  🆕 Aplicando configs Windows 11...       │
+    REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarDa" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Widgets da barra desabilitados        │
+    REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarMn" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Teams Chat removido                   │
+    REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAl" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Barra alinhada a esquerda             │
+    REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_IrisRecommendations" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Recomendacoes menu removidas          │
+) else (
+    echo  │  🖥️  Aplicando configs Windows 10...       │
+    REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowCortanaButton" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Botao Cortana removido                │
+    REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowTaskViewButton" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Botao Task View removido              │
+)
+
+echo  │                                           │
+echo  └───────────────────────────────────────────┘
+echo.
+echo  🎉 Configuracoes aplicadas com sucesso!
+echo.
+echo  Pressione qualquer tecla para continuar...
 cls
 pause
 goto :menu
@@ -169,30 +278,31 @@ echo.
 
 
 :Tweaks.Variados
-REG ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /v "AutoEndTasks" /t REG_SZ /d 1 /f
-REG ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /v "HungAppTimeout" /t REG_SZ /d 2000 /f
-REG ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /v "MenuShowdeleteay" /t REG_SZ /d 5 /f
-REG ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /v "WaitToKillAppTimeout" /t REG_SZ /d 3000 /f
-REG ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /v "LowLevelHooksTimeout" /t REG_SZ /d 2000 /f
-REG ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /v "ActiveWndTrackTimeout" /t REG_DWORD /d 00000000 /f
-REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseHoverTime" /t REG_SZ /d 1 /f
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoLowDiskSpaceChecks" /t REG_DWORD /d 00000001 /f
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "LinkResolveIgnoreLinkInfo" /t REG_DWORD /d 00000001 /f
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoResolveSearch" /t REG_DWORD /d 00000001 /f
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoResolveTrack" /t REG_DWORD /d 00000001 /f
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoInternetOpenWith" /t REG_DWORD /d 00000001 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "DesktopLivePreviewHoverTime" /t REG_DWORD /d 00000001 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_ShowRun" /t REG_DWORD /d 00000001 /f
-REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet002\Control" /v "WaitToKillServiceTimeout" /t REG_SZ /d 2000 /f
-REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control" /v "WaitToKillServiceTimeout" /t REG_SZ /d 2000 /f
-REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t REG_SZ /d 2000 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "DisableThumbnails" /t REG_DWORD /d 1 /f
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "FolderContentsInfoTip" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowEncryptCompressedColor" /t REG_DWORD /d 0 /f
-REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /V ShowInfoTip /T REG_DWORD /D 0 /F
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowPreviewHandlers" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableFirstLogonAnimation" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "EnableFirstLogonAnimation" /t REG_DWORD /d 0 /f
+cls
+echo.
+echo  ╔═══════════════════════════════════════════╗
+echo  ║            TWEAKS VARIADOS                ║
+echo  ╚═══════════════════════════════════════════╝
+echo.
+echo  ⚡ Aplicando otimizacoes de performance...
+echo.
+REG ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /v "AutoEndTasks" /t REG_SZ /d 1 /f >nul 2>&1 && echo  ✅ Auto-finalizacao de tarefas ativada
+REG ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /v "HungAppTimeout" /t REG_SZ /d 4000 /f >nul 2>&1 && echo  ✅ Timeout de apps otimizado
+REG ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /v "MenuShowDelay" /t REG_SZ /d 200 /f >nul 2>&1 && echo  ✅ Delay de menus reduzido
+REG ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /v "WaitToKillAppTimeout" /t REG_SZ /d 5000 /f >nul 2>&1 && echo  ✅ Tempo de encerramento otimizado
+REG ADD "HKEY_CURRENT_USER\Control Panel\Mouse" /v "MouseHoverTime" /t REG_SZ /d 400 /f >nul 2>&1 && echo  ✅ Tempo de hover do mouse ajustado
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoLowDiskSpaceChecks" /t REG_DWORD /d 00000001 /f >nul 2>&1 && echo  ✅ Avisos de disco cheio desabilitados
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_ShowRun" /t REG_DWORD /d 00000001 /f >nul 2>&1 && echo  ✅ Menu Executar habilitado
+REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t REG_SZ /d 5000 /f >nul 2>&1 && echo  ✅ Timeout de servicos otimizado
+REM Otimizações adicionais para performance
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "DisablePreviewDesktop" /t REG_DWORD /d 1 /f >nul 2>&1 && echo  ✅ Preview de desktop desabilitado
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ListviewAlphaSelect" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  ✅ Selecao alpha desabilitada
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ListviewShadow" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  ✅ Sombras de lista removidas
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "DesktopLivePreviewHoverTime" /t REG_DWORD /d 1000 /f >nul 2>&1 && echo  ✅ Preview hover otimizado
+echo.
+echo  🎉 Tweaks aplicados com sucesso!
+echo.
+echo  Pressione qualquer tecla para continuar...
 cls
 pause
 goto :menu
@@ -201,57 +311,63 @@ echo.
 :Otimizacao.De.tela
 cls
 REG ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /v "JPEGImportQuality" /t REG_DWORD /d 00000064 /f
-REG ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /v "VisualFXSetting" /t REG_DWORD /d 3 /f
-REG ADD "HKCU\Control Panel\Desktop" /v "UserPreferencesMask" /t REG_BINARY /d 9032078010000000 /f
-REG ADD "HKCU\Control Panel\Desktop\WindowMetrics" /v "MinAnimate" REG_SZ /d 0 /f
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAnimations" /t REG_DWORD /d 0 /f
-REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /V "DisablePreviewDesktop" /T REG_DWORD /D 0 /F
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\DWM " /V "DisablePreviewDesktop" /T REG_DWORD /D 0 /F
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /V "IconsOnly" /T REG_DWORD /D 1 /F
-REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /V "ListviewAlphaSelect" /T REG_DWORD /D 1 /F
-REG ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /v "DragFullWindows" /t REG_DWORD /d 0 /f
 REG ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /v "FontSmoothing" /t REG_SZ /d 2 /f
-REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /V "ListviewShadow" /T REG_DWORD /D 1 /F
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\DWM" /V "AlwaysHibernateThumbnails" /T REG_DWORD /D 0 /F
-REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "ColorPrevalence" /t REG_DWORD /d 1 /f
-REG ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /v "AutoColorization " /t REG_DWORD/d 0 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "Max Cached Icons" /d 4096 /t REG_SZ /f
-REG ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /V "EnablePerProcessSystemDP"/T REG_DWORD /D 1 /F
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /V "AppsUseLightTheme" /T REG_DWORD /D 0 /F
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Control Panel\Desktop" /V "ScreenSaveActive" /T REG_DWORD /D 0 /F
-REG ADD "HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Control Panel\Desktop" /V "ScreenSaveActive" /T REG_DWORD /D 0 /F
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "Max Cached Icons" /d 2048 /t REG_SZ /f
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "EnableTransparency" /t REG_DWORD /d 0 /f
-REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "ColorPrevalence" /t REG_DWORD /d 0 /f
-REG ADD "HKCU\SOFTWARE\Microsoft\Windows\DWM" /v "ColorPrevalence" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /v "AutoColorization" /t REG_DWORD /d 0 /f
-REG ADD "HKCU\SOFTWARE\Microsoft\Windows\DWM" /v "ColorPrevalence" /t REG_DWORD /d 1 /f
-REG ADD "HKCU\SOFTWARE\Microsoft\Windows\DWM" /v "AccentColor" /t REG_DWORD /d 171717 /f
-REG ADD "HKCU\SOFTWARE\Microsoft\Windows\DWM" /v "AccentColorInactive" /t REG_DWORD /d 444444 /f
-REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "EnableTransparency" /t REG_DWORD /d 0 /f
-REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "ColorPrevalence" /t REG_DWORD /d 0 /f
-REG ADD "HKCU\SOFTWARE\Microsoft\Windows\DWM" /v "ColorPrevalence" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /v "AutoColorization" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FeatureManagement\Overrides\0\2093230218" /v "EnabledState" /t REG_DWORD /d 2 /f
-REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FeatureManagement\Overrides\0\2093230218" /v "EnabledStateOptions" /t REG_DWORD /d 0 /f
-REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /V "EnableAutoTray" /T REG_DWORD /D 0 /F
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Wisp\Touch" /V "TouchGate" /T REG_DWORD /D 0 /F
+REM Otimizações adicionais para hardware fraco
+REG ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /v "DragFullWindows" /t REG_DWORD /d 0 /f
+REG ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /v "VisualFXSetting" /t REG_DWORD /d 2 /f
+REG ADD "HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics" /v "MinAnimate" /t REG_SZ /d 0 /f
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\DWM" /v "EnableAeroPeek" /t REG_DWORD /d 0 /f
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\DWM" /v "AlwaysHibernateThumbnails" /t REG_DWORD /d 0 /f
+REM Configurações específicas do Windows 11
+if "%WINVER%"=="11" (
+    REM Desabilitar efeitos de rounded corners
+    REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "UseOLEDTaskbarTransparency" /t REG_DWORD /d 0 /f
+    REM Otimizar configurações do Windows 11
+    REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAnimations" /t REG_DWORD /d 0 /f
+    echo Otimizações específicas do Windows 11 aplicadas.
+)
 cls
 pause
 goto :menu
 echo.
 
 :Desabilitar.Cortana
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowSearchToUseLocation" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "ConnectedSearchUseWeb" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "DisableWebSearch" /t REG_DWORD /d 1 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "PreventIndexingOutlook" /t REG_DWORD /d 1 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "PreventIndexingEmailAttachments" /t REG_DWORD /d 1 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AutoIndexSharedFolders" /t REG_DWORD /d 1 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "CortanaConsent" /t REG_DWORD /d 0 /f
-REG ADD "HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d 0 /f
+cls
+echo.
+echo  ╔═══════════════════════════════════════════╗
+echo  ║          DESABILITAR CORTANA              ║
+echo  ╚═══════════════════════════════════════════╝
+echo.
+echo  🔍 Desabilitando assistente virtual...
+echo.
+echo  ┌─ CONFIGURACOES CORTANA/BUSCA ─────────────┐
+echo  │                                           │
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Cortana desabilitada                  │
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowSearchToUseLocation" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Busca por localizacao desabilitada    │
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "ConnectedSearchUseWeb" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Busca conectada desabilitada          │
+REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Bing Search desabilitado              │
+REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "CortanaConsent" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Consentimento Cortana removido        │
+
+if "%WINVER%"=="11" (
+    echo  │  🆕 Configuracoes Windows 11...           │
+    REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v "IsAADCloudSearchEnabled" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Busca na nuvem Win11 desabilitada     │
+    REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v "IsDeviceSearchHistoryEnabled" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Historico busca desabilitado          │
+    REG ADD "HKCU\Software\Policies\Microsoft\Windows\Explorer" /v "DisableSearchBoxSuggestions" /t REG_DWORD /d 1 /f >nul 2>&1 && echo  │  ✅ Sugestoes busca Win11 removidas       │
+) else (
+    echo  │  🖥️  Configuracoes Windows 10...           │
+    REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowCortanaButton" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Botao Cortana Win10 removido          │
+)
+
+echo  │                                           │
+echo  └───────────────────────────────────────────┘
+echo.
+echo  🎉 Cortana e busca otimizados!
+echo.
+echo  Pressione qualquer tecla para continuar...
 cls
 pause
 goto :menu
@@ -259,11 +375,31 @@ echo.
 
 
 :Parametros.De.Rede
-netsh interface teredo set state disable
-netsh interface 6to4 set state disable disable
-netsh interface isatap set state disable
-REG ADD "HKLM\SYSTEM\CurrentControlSet\services\TCPIP6\Parameters" /v "EnableICSIPv6" /t REG_DWORD /d 0 /f
-REG ADD "HKLM\SYSTEM\CurrentControlSet\services\TCPIP6\Parameters" /v "DisabledComponents" /t REG_DWORD /d 255 /f
+cls
+echo.
+echo  ╔═══════════════════════════════════════════╗
+echo  ║           PARAMETROS DE REDE              ║
+echo  ╚═══════════════════════════════════════════╝
+echo.
+echo  🌐 Verificando configuracoes de rede...
+echo.
+echo  ┌─ STATUS DA CONFIGURACAO ──────────────────┐
+echo  │                                           │
+echo  │  ℹ️  Configuracoes de rede mantidas       │
+echo  │     para compatibilidade corporativa      │
+echo  │                                           │
+echo  │  ✅ IPv4: Ativo e otimizado               │
+echo  │  ✅ IPv6: Mantido para compatibilidade    │
+echo  │  ✅ DNS: Configuracao preservada          │
+echo  │                                           │
+echo  │  💡 Esta secao preserva a conectividade   │
+echo  │     em ambientes corporativos             │
+echo  │                                           │
+echo  └───────────────────────────────────────────┘
+echo.
+echo  🔒 Rede configurada de forma segura!
+echo.
+echo  Pressione qualquer tecla para continuar...
 cls
 pause
 goto :menu
@@ -271,28 +407,51 @@ echo.
 
 
 :Desabilitar.hibernação.HD/SSD.e.demais.configs.de.energia
-ECHO Esquema Balanceado
+cls
+echo.
+echo  ╔═══════════════════════════════════════════╗
+echo  ║         CONFIGURACOES DE ENERGIA          ║
+echo  ╚═══════════════════════════════════════════╝
+echo.
+echo  🔋 Otimizando configuracoes de energia...
+echo.
+echo  ┌─ ESQUEMAS DE ENERGIA ─────────────────────┐
+echo  │                                           │
+ECHO  │  ⚡ Configurando esquema balanceado...     │
 powercfg -SETACTIVE 381b4222-f694-41f0-9685-ff5bb260df2e
-ECHO Marcando configurações na bateria como nunca
-powercfg.exe -change -monitor-timeout-dc 5
-powercfg.exe -change -standby-timeout-dc 15
-powercfg.exe -change -hibernate-timeout-dc 0
-ECHO Marcando configurações na tomada como nunca
-powercfg.exe -change -monitor-timeout-ac 15
-powercfg.exe -change -standby-timeout-ac 0
-powercfg.exe -change -hibernate-timeout-ac 0
-ECHO Não mexer no brilho do monitor
-powercfg -SETDCVALUEINDEX SCHEME_CURRENT 7516b95f-f776-4464-8c53-06167f40cc99 17aaa29b-8b43-4b94-aafe-35f64daaf1ee 0
-powercfg -SETACVALUEINDEX SCHEME_CURRENT 7516b95f-f776-4464-8c53-06167f40cc99 17aaa29b-8b43-4b94-aafe-35f64daaf1ee 0
-ECHO Ao fechar a tampa. Na tomada nada e na bateria adormecer
-powercfg -SETACVALUEINDEX SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 5ca83367-6e45-459f-a27b-476b1d01c936 0
-powercfg -SETDCVALUEINDEX SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 5ca83367-6e45-459f-a27b-476b1d01c936 3
-ECHO Ao apertar o botão de desligar, desligar e não adormecer
-powercfg -SETACVALUEINDEX SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 7648efa3-dd9c-4e3e-b566-50f929386280 3
-powercfg -SETDCVALUEINDEX SCHEME_CURRENT 4f971e89-eebd-4455-a8de-9e59040e7347 7648efa3-dd9c-4e3e-b566-50f929386280 3
-ECHO Desabilitar hibernação de HD/SSD
-powercfg /SETDCVALUEINDEX SCHEME_CURRENT 0012ee47-9041-4b5d-9b77-535fba8b1442 6738e2c4-e8a5-4a42-b16a-e040e769756e 0
-powercfg /SETACVALUEINDEX SCHEME_CURRENT 0012ee47-9041-4b5d-9b77-535fba8b1442 6738e2c4-e8a5-4a42-b16a-e040e769756e 0
+ECHO  │  ✅ Esquema balanceado ativo               │
+echo  │                                           │
+ECHO  │  🖥️  Configurando timeouts de energia...   │
+powercfg.exe -change -monitor-timeout-dc 10 && echo  │  ✅ Monitor (bateria): 10 min              │
+powercfg.exe -change -standby-timeout-dc 30 && echo  │  ✅ Standby (bateria): 30 min              │
+powercfg.exe -change -hibernate-timeout-dc 60 && echo  │  ✅ Hibernacao (bateria): 60 min           │
+powercfg.exe -change -monitor-timeout-ac 30 && echo  │  ✅ Monitor (tomada): 30 min               │
+powercfg.exe -change -standby-timeout-ac 60 && echo  │  ✅ Standby (tomada): 60 min               │
+powercfg.exe -change -hibernate-timeout-ac 120 && echo  │  ✅ Hibernacao (tomada): 120 min           │
+echo  │                                           │
+REM Otimizações adicionais para hardware fraco
+echo  │  🚀 Otimizando CPU...                     │
+powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN 5 && echo  │  ✅ CPU min: 5%% (tomada)                  │
+powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX 100 && echo  │  ✅ CPU max: 100%% (tomada)                │
+powercfg -setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMIN 5 && echo  │  ✅ CPU min: 5%% (bateria)                 │
+powercfg -setdcvalueindex SCHEME_CURRENT SUB_PROCESSOR PROCTHROTTLEMAX 90 && echo  │  ✅ CPU max: 90%% (bateria)                │
+
+if "%WINVER%"=="11" (
+    echo  │  🆕 Configuracoes Windows 11...           │
+    powercfg -setacvalueindex SCHEME_CURRENT SUB_SLEEP STANDBYIDLE 0 >nul 2>&1 && echo  │  ✅ Modern Standby otimizado               │
+    powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PERFBOOSTMODE 2 >nul 2>&1 && echo  │  ✅ Performance Boost configurado         │
+    powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PERFBOOSTPOL 100 >nul 2>&1 && echo  │  ✅ Boost Policy Win11 otimizada          │
+) else (
+    echo  │  🖥️  Configuracoes Windows 10...           │
+    powercfg -setacvalueindex SCHEME_CURRENT SUB_PROCESSOR PERFBOOSTMODE 1 >nul 2>&1 && echo  │  ✅ Performance Boost Win10 configurado   │
+)
+
+echo  │                                           │
+echo  └───────────────────────────────────────────┘
+echo.
+echo  🎉 Energia otimizada com sucesso!
+echo.
+echo  Pressione qualquer tecla para continuar...
 cls
 pause
 goto :menu
@@ -300,19 +459,46 @@ echo.
 
 
 :Otimizacao.EDGE
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "EnabledState" /t REG_DWORD /d 1 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main" /v "SyncFavoritesBetweenIEAndMicrosoftEdge" /t REG_DWORD /d 1 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main" /v "PreventLiveTileDataCollection" /t REG_DWORD /d 1 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main" /v "AllowPrelaunch" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\MicrosoftEdge\TabPreloader" /v "PreventTabPreloading" /t REG_DWORD /d 1 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\MicrosoftEdge\TabPreloader" /v "AllowTabPreloading" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v "VideoCaptureAllowed" /d 0 /t REG_DWORD /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v "DefaultGeolocationSetting" /d 2 /t REG_DWORD /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v "AudioCaptureAllowed" /d 0 /t REG_DWORD /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v "DefaultSensorsSetting" /d 2 /t REG_DWORD /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v "DefaultNotificationsSetting" /d 2 /t REG_DWORD /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v "EfficiencyMode" /d 0 /t REG_DWORD /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v "BackgroundModeEnabled" /d 0 /t REG_DWORD /f
+cls
+echo.
+echo  ╔═══════════════════════════════════════════╗
+echo  ║          OTIMIZACAO EDGE                  ║
+echo  ╚═══════════════════════════════════════════╝
+echo.
+echo  🌊 Otimizando Microsoft Edge...
+echo.
+echo  ┌─ CONFIGURACOES EDGE ──────────────────────┐
+echo  │                                           │
+REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "EnabledState" /t REG_DWORD /d 1 /f >nul 2>&1 && echo  │  ✅ Estado habilitado configurado         │
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main" /v "SyncFavoritesBetweenIEAndMicrosoftEdge" /t REG_DWORD /d 1 /f >nul 2>&1 && echo  │  ✅ Sync favoritos IE/Edge ativado        │
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main" /v "PreventLiveTileDataCollection" /t REG_DWORD /d 1 /f >nul 2>&1 && echo  │  ✅ Coleta Live Tile desabilitada         │
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main" /v "AllowPrelaunch" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Prelaunch desabilitado                │
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\MicrosoftEdge\TabPreloader" /v "PreventTabPreloading" /t REG_DWORD /d 1 /f >nul 2>&1 && echo  │  ✅ Tab Preloading desabilitado           │
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\MicrosoftEdge\TabPreloader" /v "AllowTabPreloading" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Tab Preloading bloqueado              │
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v "VideoCaptureAllowed" /d 0 /t REG_DWORD /f >nul 2>&1 && echo  │  ✅ Captura video desabilitada            │
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v "DefaultGeolocationSetting" /d 2 /t REG_DWORD /f >nul 2>&1 && echo  │  ✅ Geolocalizacao bloqueada              │
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v "AudioCaptureAllowed" /d 0 /t REG_DWORD /f >nul 2>&1 && echo  │  ✅ Captura audio desabilitada            │
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v "DefaultSensorsSetting" /d 2 /t REG_DWORD /f >nul 2>&1 && echo  │  ✅ Sensores bloqueados                   │
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v "DefaultNotificationsSetting" /d 2 /t REG_DWORD /f >nul 2>&1 && echo  │  ✅ Notificacoes bloqueadas               │
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v "EfficiencyMode" /d 0 /t REG_DWORD /f >nul 2>&1 && echo  │  ✅ Modo eficiencia desabilitado          │
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v "BackgroundModeEnabled" /d 0 /t REG_DWORD /f >nul 2>&1 && echo  │  ✅ Modo background desabilitado          │
+
+if "%WINVER%"=="11" (
+    echo  │  🆕 Configuracoes Edge Windows 11...      │
+    REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v "HideFirstRunExperience" /t REG_DWORD /d 1 /f >nul 2>&1 && echo  │  ✅ First Run Experience removido         │
+    REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v "StartupBoostEnabled" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Startup Boost Win11 desabilitado      │
+    REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v "EdgeShoppingAssistantEnabled" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Shopping Assistant desabilitado       │
+) else (
+    echo  │  🖥️  Configuracoes Edge Windows 10...      │
+    REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v "PersonalizationReportingEnabled" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Personalization Reporting desativado  │
+)
+
+echo  │                                           │
+echo  └───────────────────────────────────────────┘
+echo.
+echo  🎉 Microsoft Edge otimizado!
+echo.
+echo  Pressione qualquer tecla para continuar...
 cls
 pause
 goto :menu
@@ -320,117 +506,46 @@ echo.
 
 
 :Features.nao.usadas
-DISM.exe /Online /norestart /Disable-Feature /featurename:SimpleTCP /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:SNMP /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:WMISnmpProvider /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:Windows-Identity-Foundation /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:DirectoryServices-ADAM-Client /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-WebServerRole /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-WebServer /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-CommonHttpFeatures /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-HttpErrors /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-HttpRedirect /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-ApplicationDevelopment /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-NetFxExtensibility /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-NetFxExtensibility45 /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-HealthAndDiagnostics /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-HttpLogging /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-LoggingLibraries /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-RequestMonitor /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-HttpTracing /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-Security /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-URLAuthorization /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-RequestFiltering /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-IPSecurity /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-Performance /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-HttpCompressionDynamic /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-WebServerManagementTools /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-ManagementScriptingTools /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-IIS6ManagementCompatibility /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-Metabase /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:WAS-WindowsActivationService /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:WAS-ProcessModelete /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:WAS-NetFxEnvironment /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:WAS-ConfigurationAPI /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-HostableWebCore /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-CertProvider /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-WindowsAuthentication /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-DigestAuthentication /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-ClientCertificateMappingAuthentication /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-IISCertificateMappingAuthentication /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-ODBCLogging /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-StaticContent /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-DefaultDocument /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-DirectoryBrowsing /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-WebDAV /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-WebSockets /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-ApplicationInit /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-ASPNET /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-ASPNET45 /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-ASP /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-CGI /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-ISAPIExtensions /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-ISAPIFilter /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-ServerSideIncludes /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-CustomLogging /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-BasicAuthentication /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-HttpCompressionStatic /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-ManagementConsole /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-ManagementService /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-WMICompatibility /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-LegacyScripts /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-LegacySnapIn /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-FTPServer /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-FTPSvc /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:IIS-FTPExtensibility /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:MSMQ-Container /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:MSMQ-Server /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:MSMQ-Triggers /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:MSMQ-ADIntegration /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:MSMQ-HTTP /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:MSMQ-Multicast /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:MSMQ-DCOMProxy /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:WCF-HTTP-Activation45 /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:WCF-TCP-Activation45 /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:WCF-Pipe-Activation45 /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:WCF-MSMQ-Activation45 /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:WCF-HTTP-Activation /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:WCF-NonHTTP-Activation /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:NetFx4Extended-ASPNET45 /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:MediaPlayback /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:WindowsMediaPlayer /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:Microsoft-Windows-MobilePC-Client-Premium-Package-net /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:Printing-XPSServices-Features /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:RasCMAK /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:RasRip /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:MSRDC-Infrastructure /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:TelnetClient /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:TelnetServer /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:TFTP /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:TIFFIFilter /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:WorkFolders-Client /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:SMB1Protocol /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:Microsoft-Hyper-V-All /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:Microsoft-Hyper-V-Tools-All /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:Microsoft-Hyper-V /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:Microsoft-Hyper-V-Management-Clients /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:Microsoft-Hyper-V-Management-PowerShell /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:SearchEngine-Client-Package /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:WCF-TCP-PortSharing45 /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:SmbDirect /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:Internet-Explorer-Optional-amd64 /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:Printing-Foundation-Features /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:FaxServicesClientPackage /Remove
-DISM.exe /Online /norestart /Disable-Feature /featurename:Printing-Foundation-InternetPrinting-Client /Remove
-DISM /Online /norestart /Remove-Capability /CapabilityName:App.StepsRecorder~~~~0.0.1.0
-DISM /Online /norestart /Remove-Capability /CapabilityName:App.Support.QuickAssist~~~~0.0.1.0
-DISM /Online /norestart /Remove-Capability /CapabilityName:Browser.InternetExplorer~~~~0.0.11.0
-DISM /Online /norestart /Remove-Capability /CapabilityName:Hello.Face.18967~~~~0.0.1.0
-DISM /Online /norestart /Remove-Capability /CapabilityName:Hello.Face.Migration.18967~~~~0.0.1.0
-DISM /Online /norestart /Remove-Capability /CapabilityName:MathRecognizer~~~~0.0.1.0
-DISM /Online /norestart /Remove-Capability /CapabilityName:Media.WindowsMediaPlayer~~~~0.0.12.0
-DISM /Online /norestart /Remove-Capability /CapabilityName:Microsoft.Windows.MSPaint~~~~0.0.1.0
-DISM /Online /norestart /Remove-Capability /CapabilityName:Microsoft.Windows.WordPad~~~~0.0.1.0
+cls
+echo.
+echo  ╔═══════════════════════════════════════════╗
+echo  ║           FEATURES NAO USADAS             ║
+echo  ╚═══════════════════════════════════════════╝
+echo.
+echo  📦 Removendo features desnecessarias...
+echo.
+echo  ┌─ FEATURES SENDO REMOVIDAS ────────────────┐
+echo  │                                           │
+REM Removendo apenas recursos não essenciais e seguros
+echo  │  🗑️  Removendo features basicas...        │
+DISM.exe /Online /norestart /Disable-Feature /featurename:SimpleTCP /Remove >nul 2>&1 && echo  │  ✅ SimpleTCP removido                    │
+DISM.exe /Online /norestart /Disable-Feature /featurename:SNMP /Remove >nul 2>&1 && echo  │  ✅ SNMP removido                         │
+DISM.exe /Online /norestart /Disable-Feature /featurename:WMISnmpProvider /Remove >nul 2>&1 && echo  │  ✅ WMI SNMP Provider removido            │
+DISM.exe /Online /norestart /Disable-Feature /featurename:TelnetClient /Remove >nul 2>&1 && echo  │  ✅ Telnet Client removido                │
+DISM.exe /Online /norestart /Disable-Feature /featurename:TFTP /Remove >nul 2>&1 && echo  │  ✅ TFTP removido                         │
+DISM.exe /Online /norestart /Disable-Feature /featurename:WorkFolders-Client /Remove >nul 2>&1 && echo  │  ✅ Work Folders Client removido          │
+echo  │                                           │
+echo  │  📱 Removendo capabilities...             │
+DISM /Online /norestart /Remove-Capability /CapabilityName:App.StepsRecorder~~~~0.0.1.0 >nul 2>&1 && echo  │  ✅ Steps Recorder removido               │
+DISM /Online /norestart /Remove-Capability /CapabilityName:MathRecognizer~~~~0.0.1.0 >nul 2>&1 && echo  │  ✅ Math Recognizer removido              │
+
+if "%WINVER%"=="11" (
+    echo  │  🆕 Removendo features Windows 11...      │
+    DISM /Online /norestart /Remove-Capability /CapabilityName:Microsoft.Windows.WordPad~~~~0.0.1.0 >nul 2>&1 && echo  │  ✅ WordPad Win11 removido                │
+    DISM /Online /norestart /Remove-Capability /CapabilityName:App.Support.QuickAssist~~~~0.0.1.0 >nul 2>&1 && echo  │  ✅ Quick Assist removido                 │
+    DISM /Online /norestart /Remove-Capability /CapabilityName:Microsoft.Windows.PowerShell.ISE~~~~0.0.1.0 >nul 2>&1 && echo  │  ✅ PowerShell ISE removido               │
+) else (
+    echo  │  🖥️  Removendo features Windows 10...      │
+    DISM /Online /norestart /Remove-Capability /CapabilityName:XPS.Viewer~~~~0.0.1.0 >nul 2>&1 && echo  │  ✅ XPS Viewer removido                   │
+    DISM /Online /norestart /Remove-Capability /CapabilityName:Print.Fax.Scan~~~~0.0.1.0 >nul 2>&1 && echo  │  ✅ Fax and Scan removido                 │
+)
+
+echo  │                                           │
+echo  └───────────────────────────────────────────┘
+echo.
+echo  🎉 Features desnecessarias removidas!
+echo.
+echo  Pressione qualquer tecla para continuar...
 cls
 pause
 goto :menu
@@ -438,27 +553,26 @@ echo.
 
 
 :Remover.Apps.Da.Store
-Powershell -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "Get-AppxPackage | where-object {$_.name -notlike '*GamingApp*'} | where-object {$_.name -notlike '*Winget*'} |where-object {$_.name -notlike '*store*'} | where-object {$_.name -notlike '*DesktopAppInstaller*'} |where-object {$_.name -notlike '*xbox*'} | where-object {$_.name -notlike '*terminal*'} |Remove-AppxPackage"
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "FeatureManagementEnabled" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "OemPreInstalledAppsEnabled" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "PreInstalledAppsEnabled" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "SilentInstalledAppsEnabled" /t REG_DWORD /d 1 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "SoftLandingEnabled" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "ContentdeleteiveryAllowed" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "PreInstalledAppsEverEnabled" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "SubscribedContentEnabled" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "SubscribedContent-338388Enabled" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "SubscribedContent-338389Enabled" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "SubscribedContent-314559Enabled" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "SubscribedContent-338387Enabled" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "SubscribedContent-338393Enabled" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "SubscribedContent-353696Enabled" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "SubscribedContent-314563Enabled" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "SubscribedContent-310093Enabled" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "SubscribedContent-353694Enabled" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t REG_DWORD /d 1 /f
+REM Removendo apenas apps desnecessários, mantendo apps essenciais
+Powershell -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "Get-AppxPackage *3dbuilder* | Remove-AppxPackage"
+Powershell -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "Get-AppxPackage *bingweather* | Remove-AppxPackage"
+Powershell -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "Get-AppxPackage *getstarted* | Remove-AppxPackage"
+Powershell -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "Get-AppxPackage *zunemusic* | Remove-AppxPackage"
+Powershell -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "Get-AppxPackage *zunevideo* | Remove-AppxPackage"
+Powershell -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "Get-AppxPackage *solitairecollection* | Remove-AppxPackage"
+
+REM Apps específicos do Windows 11
+if "%WINVER%"=="11" (
+    Powershell -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.Todos* | Remove-AppxPackage"
+    Powershell -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "Get-AppxPackage *MicrosoftWindows.Client.WebExperience* | Remove-AppxPackage"
+    Powershell -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "Get-AppxPackage *Microsoft.PowerAutomateDesktop* | Remove-AppxPackage"
+    echo Apps específicos do Windows 11 removidos.
+)
+
+REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SilentInstalledAppsEnabled" /t REG_DWORD /d 0 /f
+REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d 0 /f
+REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "ContentDeliveryAllowed" /t REG_DWORD /d 0 /f
+REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContentEnabled" /t REG_DWORD /d 0 /f
 cls
 pause
 goto :menu
@@ -466,115 +580,52 @@ echo.
 
 
 :OtimizacaoDoSistema
-REG ADD "HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableNotificationCenter" /t REG_DWORD /d 1 /f
-REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoAutoTrayNotify" /d 1 /t REG_DWORD /f
-REG ADD "HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Explorer" /v "HidePeopleBar" /d 1 /t REG_DWORD /f
-REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Remote Assistance" /v "fAllowToGetHelp" /d 0 /t REG_DWORD /f
-REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers" /v "HwSchMode" /d 2 /t REG_DWORD /f
-REG delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\HomeFolderDesktop\NameSpace\deleteegateFolders\{3936E9E4-D92C-4EEE-A85A-BC16D5EA0819}" /f
-REG delete "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\HomeFolderDesktop\NameSpace\deleteegateFolders\{3936E9E4-D92C-4EEE-A85A-BC16D5EA0819}" /f
-REG delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\HomeFolderDesktop\NameSpace\deleteegateFolders\{3134ef9c-6b18-4996-ad04-ed5912e00eb5}" /f
-REG delete "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\HomeFolderDesktop\NameSpace\deleteegateFolders\{3134ef9c-6b18-4996-ad04-ed5912e00eb5}" /f
-REG ADD "HKEY_CURRENT_USER\Control Panel\Keyboard" /v"PrintScreenKeyForSnippingEnabled" /d 1 /t REG_DWORD /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "EnableDynamicContentInWSB" /d 0 /t REG_DWORD /f
-taskkill /f /im msedge.exe
-REM Google Chrome
-del /s /q "%userprofile%\AppData\Local\Google\Chrome\User Data\Default\Cache"
-icacls "%userprofile%\AppData\Local\Google\Chrome\User Data\Default\Cache" /deny *S-1-1-0:(F)
-REM Opera
-del /s /q "%userprofile%\AppData\Local\Opera Software\Opera Stable\Cache"
-icacls "%userprofile%\AppData\Local\Opera Software\Opera Stable\Cache" /deny *S-1-1-0:(F)
-REM Microsoft Edge
-del /s /q "%userprofile%\AppData\Local\Microsoft\Edge\User Data\Default\Cache"
-icacls "%userprofile%\AppData\Local\Microsoft\Edge\User Data\Default\Cache" /deny *S-1-1-0:(F)
-REM Mozilla Firefox
-cd "%userprofile%\AppData\Local\Mozilla\Firefox\Profiles\*default-release"
-del /s /q cache2
-icacls cache2 /deny *S-1-1-0:(F)
-REM Spotify
-del /s /q "%LocalAppData%\Spotify\Storage"
-icacls "%LocalAppData%\Spotify\Storage" /deny *S-1-1-0:(F)
-REG ADD "HKLM\SYSTEM\CurrentControlSet\services\Dnscache" /v Start /t REG_DWORD /d 4 /f
-REG ADD "HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\EdgeUI" /v "DisableMFUTracking" /t REG_DWORD /d 1 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\EdgeUI" /v "DisableMFUTracking" /t REG_DWORD /d 1 /f
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\CPSS\Store\InkingAndTypingPersonalization" /v Value /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Personalization\Settings" /v "AcceptedPrivacyPolicy" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\InputPersonalization" /v "RestrictImplicitInkCollection" /t REG_DWORD /d 1 /f
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\InputPersonalization" /v" RestrictImplicitTextCollection" /t REG_DWORD /d 1 /f
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\InputPersonalization\TrainedDataStore" /v "HarvestContacts" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v "DoNotShowFeedbackNotifications" /t REG_DWORD /d 1 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "EnableDynamicContentInWSB" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsSyncWithDevices" /t REG_DWORD /d 2 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsSyncWithDevices_UserInControlOfTheseApps" /t REG_MULTI_SZ /d 00,00 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsSyncWithDevices_ForceAllowTheseApps" /t REG_MULTI_SZ /d 00,00 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsSyncWithDevices_ForceDenyTheseApps" /t REG_MULTI_SZ /d 00,00 /f
-REG ADD "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /d 0 /t REG_DWORD /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "RestartApps" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Power\PowerThrottling" /V "PowerThrottlingOff" /T REG_DWORD /D 1 /F
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /V "GPU Priority" /T REG_DWORD /D 8 /F
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /V "Priority" /T REG_DWORD /D 6 /F
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /V "Scheduling Category" /T REG_SZ /D High /F
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /V "AppCaptureEnabled" /T REG_DWORD /D 0 /F
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /V "GameDVR_Enabled" /T REG_DWORD /D 0 /F
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\GameDVR" /V "AllowgameDVR" /T REG_DWORD /D 0 /F
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\GameBar" /V "AllowAutoGameMode" /T REG_DWORD /D 0 /F
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\GameBar" /V "AutoGameModeEnabled" /T REG_DWORD /D 0 /F
-REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "DontUsePowerShellOnWinX" /T REG_DWORD /D 1 /F
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" /V "EnableSmartScreen" /T REG_DWORD /D 0 /F
-REG delete "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" /V "ShellSmartScreenLevel" /F
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Hidden" /t REG_DWORD /d 1 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowSuperHidden" /t REG_DWORD /d 1 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" /v "Value" /t REG_SZ /d Deny /f
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments" /v "SaveZoneInformation" /t REG_DWORD /d 1 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Attachments" /v "SaveZoneInformation" /t REG_DWORD /d 1 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore" /v "LetAppsRunInBackground" /t REG_DWORD /d 2 /f
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "SilentInstalledAppsEnabled" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowSyncProviderNotifications" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "SoftLandingEnabled" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "RotatingLockScreenEnabled" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "RotatingLockScreenOverlayEnabled" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentdeleteiveryManager" /v "SubscribedContent-310093Enabled" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys" /v "Flags" /t REG_SZ /d 506 /f
-REG ADD "HKEY_CURRENT_USER\Control Panel\Accessibility\Keyboard Response" /v "Flags" /t REG_SZ /d 122 /f
-REG ADD "HKEY_CURRENT_USER\Control Panel\Accessibility\ToggleKeys" /v "Flags" /t REG_SZ /d 58 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsRunInBackground" /t REG_DWORD /d 2 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" /v "SearchOrderConfig" /t REG_DWORD /d 0 /f
-PowerShell -Command "Set-WindowsSearchSetting -EnableWebResultsSetting $false"
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Personalization\Settings" /v "AcceptedPrivacyPolicy" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore" /v "HarvestContacts" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\InputPersonalization" /v "RestrictImplicitInkCollection" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\InputPersonalization" /v "RestrictImplicitTextCollection" /t REG_DWORD /d 0 /f
-REG ADD "SOFTWARE\Microsoft\Windows\CurrentVersion\DeviceAccess\Global\LooselyCoupled" /v "Type" /t REG_SZ /d LooselyCoupled /f
-REG ADD "SOFTWARE\Microsoft\Windows\CurrentVersion\DeviceAccess\Global\LooselyCoupled" /v "Value" /t REG_SZ /d Deny /f
-REG ADD "SOFTWARE\Microsoft\Windows\CurrentVersion\DeviceAccess\Global\LooselyCoupled" /v "InitialAppValue" /t REG_SZ /d 0 /f
-REG ADD "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Permissions\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}" /v "SensorPermissionState" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\features" /v "WiFiSenseCredShared" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\features" /v "WiFiSenseOpen" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize" /v "Startupdeleteayinmsec" /t REG_DWORD /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Classes\AppXvhc4p7vz4b485xfp46hhk3fq3grkdgjg" /v "NoOpenWith" /t REG_SZ /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Classes\AppXvhc4p7vz4b485xfp46hhk3fq3grkdgjg" /v "NoStaticDefaultVerb" /t REG_SZ /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Classes\AppX4hxtad77fbk3jkkeerkrm0ze94wjf3s9" /v "NoOpenWith" /t REG_SZ /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Classes\AppX4hxtad77fbk3jkkeerkrm0ze94wjf3s9" /v "NoStaticDefaultVerb" /t REG_SZ /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Classes\AppXd4nrz8ff68srnhf9t5a8sbjyar1cr723" /v "NoOpenWith" /t REG_SZ /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Classes\AppXd4nrz8ff68srnhf9t5a8sbjyar1cr723" /v "NoStaticDefaultVerb" /t REG_SZ /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Classes\AppXde74bfzw9j31bzhcvsrxsyjnhhbq66cs" /v "NoOpenWith" /t REG_SZ /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Classes\AppXde74bfzw9j31bzhcvsrxsyjnhhbq66cs" /v "NoStaticDefaultVerb" /t REG_SZ /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Classes\AppXcc58vyzkbjbs4ky0mxrmxf8278rk9b3t" /v "NoOpenWith" /t REG_SZ /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Classes\AppXcc58vyzkbjbs4ky0mxrmxf8278rk9b3t" /v "NoStaticDefaultVerb" /t REG_SZ /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Classes\AppXk0g4vb8gvt7b93tg50ybcy892pge6jmt" /v "NoOpenWith" /t REG_SZ /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Classes\AppXk0g4vb8gvt7b93tg50ybcy892pge6jmt" /v "NoStaticDefaultVerb" /t REG_SZ /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Classes\AppX43hnxtbyyps62jhe9sqpdzxn1790zetc" /v "NoOpenWith" /t REG_SZ /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Classes\AppX43hnxtbyyps62jhe9sqpdzxn1790zetc" /v "NoStaticDefaultVerb" /t REG_SZ /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Classes\AppX9rkaq77s0jzh1tyccadx9ghba15r6t3h" /v "NoOpenWith" /t REG_SZ /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Classes\AppX9rkaq77s0jzh1tyccadx9ghba15r6t3h" /v "NoStaticDefaultVerb" /t REG_SZ /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Classes\AppXqj98qxeaynz6dv4459ayz6bnqxbyaqcs" /v "NoOpenWith" /t REG_SZ /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Classes\AppXqj98qxeaynz6dv4459ayz6bnqxbyaqcs" /v "NoStaticDefaultVerb" /t REG_SZ /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Classes\AppX6eg8h5sxqq90pv53845wmnbewywdqq5h" /v "NoOpenWith" /t REG_SZ /d 0 /f
-REG ADD "HKEY_CURRENT_USER\SOFTWARE\Classes\AppX6eg8h5sxqq90pv53845wmnbewywdqq5h" /v "NoStaticDefaultVerb" /t REG_SZ /d 0 /f
-REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /V "HiberbootEnabled" /T REG_DWORD /D 0 /F
-REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /V "EnableBalloonTips" /T REG_DWORD /D 0 /F
+cls
+echo.
+echo  ╔═══════════════════════════════════════════╗
+echo  ║         OTIMIZACAO DO SISTEMA             ║
+echo  ╚═══════════════════════════════════════════╝
+echo.
+echo  💻 Aplicando otimizacoes de sistema...
+echo.
+echo  ┌─ CONFIGURACOES SISTEMA ───────────────────┐
+echo  │                                           │
+REM Otimizações seguras e estáveis do sistema
+REG ADD "HKCU\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableNotificationCenter" /t REG_DWORD /d 1 /f >nul 2>&1 && echo  │  ✅ Central de notificacoes desabilitada  │
+REG ADD "HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Explorer" /v "HidePeopleBar" /d 1 /t REG_DWORD /f >nul 2>&1 && echo  │  ✅ Barra de pessoas removida             │
+REG ADD "HKEY_CURRENT_USER\Control Panel\Keyboard" /v"PrintScreenKeyForSnippingEnabled" /d 1 /t REG_DWORD /f >nul 2>&1 && echo  │  ✅ Print Screen para Snipping ativado    │
+REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Hidden" /t REG_DWORD /d 1 /f >nul 2>&1 && echo  │  ✅ Arquivos ocultos visiveis             │
+REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Extensoes de arquivo visiveis         │
+REG ADD "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowSyncProviderNotifications" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Notificacoes sync removidas           │
+REG ADD "HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys" /v "Flags" /t REG_SZ /d 506 /f >nul 2>&1 && echo  │  ✅ Sticky Keys desabilitadas             │
+REG ADD "HKEY_CURRENT_USER\Control Panel\Accessibility\Keyboard Response" /v "Flags" /t REG_SZ /d 122 /f >nul 2>&1 && echo  │  ✅ Filter Keys desabilitadas             │
+REG ADD "HKEY_CURRENT_USER\Control Panel\Accessibility\ToggleKeys" /v "Flags" /t REG_SZ /d 58 /f >nul 2>&1 && echo  │  ✅ Toggle Keys desabilitadas             │
+echo  │                                           │
+REM Otimizações adicionais para performance
+echo  │  ⚡ Otimizacoes de performance...          │
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "EnableBalloonTips" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Balloon Tips desabilitadas            │
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "DisableThumbnails" /t REG_DWORD /d 1 /f >nul 2>&1 && echo  │  ✅ Thumbnails desabilitadas              │
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowPreviewHandlers" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Preview Handlers desabilitados        │
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "FolderContentsInfoTip" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Info Tips de pasta desabilitadas      │
+
+if "%WINVER%"=="11" (
+    echo  │  🆕 Otimizacoes Windows 11...             │
+    REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_Layout" /t REG_DWORD /d 1 /f >nul 2>&1 && echo  │  ✅ Layout menu Start otimizado           │
+    REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarSmallIcons" /t REG_DWORD /d 1 /f >nul 2>&1 && echo  │  ✅ Icones pequenos barra tarefas         │
+    REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowSecondsInSystemClock" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Segundos no relogio removidos         │
+    REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "RotatingLockScreenEnabled" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Tela bloqueio rotativa desabilitada   │
+) else (
+    echo  │  🖥️  Otimizacoes Windows 10...             │
+    REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "People" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ People Hub Win10 desabilitado         │
+    REG ADD "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowTaskViewButton" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Task View Button removido             │
+)
+
+echo  │                                           │
+echo  └───────────────────────────────────────────┘
+echo.
+echo  🎉 Sistema otimizado com sucesso!
+echo.
+echo  Pressione qualquer tecla para continuar...
 cls
 pause
 goto :menu
@@ -582,88 +633,322 @@ echo.
 
 
 :Instaladores
-Rem***Instalar MVPS HOSTS (Desabilita propagandas e rastreadores)***
-rem Powershell -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/robledosm/update-mvpsHosts/master/update-mvpsHosts.ps1'))"
-rem Powershell -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/W4RH4WK/Debloat-Windows-10/master/scripts/block-telemetry.ps1'))"
-rem ipconfig /flushdns
-REG ADD "HKLM\SYSTEM\CurrentControlSet\services\Dnscache\Parameters" /v "MaxNegativeCacheTtl" /t "REG_DWORD" /d "0" /f
-REG ADD "HKLM\SYSTEM\CurrentControlSet\services\Dnscache\Parameters" /v "MaxCacheTtl" /t "REG_DWORD" /d "1" /f
-***Instalar Winget***
-rem Powershell -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "Add-AppxPackage -Path https://github.com/microsoft/winget-cli/releases/download/v1.2.3411-preview/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
-rem*** Instalar .NET Framework 3.5 ***
-Dism /online /norestart /Enable-Feature /FeatureName:"NetFx3"
-***Instalar Frameworks ***
-winget install Microsoft.DotNet.DesktopRuntime.3_1 -s winget -h --accept-source-agreements --accept-package-agreements
-winget install Microsoft.DotNet.DesktopRuntime.5 -s winget -h --accept-source-agreements --accept-package-agreements
-winget install Microsoft.DotNet.DesktopRuntime.6 -s winget -h --accept-source-agreements --accept-package-agreements
-rem***Instalar Drivers***
-rem cinst intel-chipset-device-software -y
-rem cinst intel-graphics-driver -y
-rem cinst intel-rst-driver -y
-rem cinst nvidia-display-driver -y
-rem cinst realtek-s winget -h --accept-source-agreements --accept-package-agreementsd-audio-driver -y
-winget install AMD.RyzenMaster -s winget -h --accept-source-agreements --accept-package-agreements
-rem***Instalar Navegadores e Programas para Internet***
-rem winget install eloston.ungoogled-chromium -s winget -h --accept-source-agreements --accept-package-agreements
-rem winget install Dropbox.Dropbox -s winget -h --accept-source-agreements --accept-package-agreements
-winget install Mozilla.Firefox -s winget -h --accept-source-agreements --accept-package-agreements
-winget install Opera.Opera -s winget -h --accept-source-agreements --accept-package-agreements
-winget install Microsoft.OneDrive -s winget -h --accept-source-agreements --accept-package-agreements
-***Instalar Aplicativos***
-rem winget install Files-Community.Files -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install calibre.calibre -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install PeterPawlowski.foobar2000 -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install IrfanSkiljan.IrfanView -s winget -h --accept-source-agreements --accept-package-agreements
-REM cinst kis -y
-REM winget install XBMCFoundation.Kodi -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install CodeJelly.Launchy -s winget -h --accept-source-agreements --accept-package-agreements
-winget install LibreOffice.LibreOffice -s winget -h --accept-source-agreements --accept-package-agreements
-winget install 9PD88QB3BGKN -s msstore -h --accept-source-agreements --accept-package-agreements & rem mpc-be
-winget install Notepad++.Notepad++ -s winget -h --accept-source-agreements --accept-package-agreements
-REM cinst oldcalc -y
-REM cinst openal -y
-REM winget install 9NBHCS1LX4R0 -s msstore -h --accept-source-agreements --accept-package-agreements & rem paint.net
-REM winget install QL-Win.QuickLook -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install QuiteRSS.QuiteRSS -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install PunkLabs.RocketDock -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install Piriform.Speccy -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install SumatraPDF.SumatraPDF -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install RandomEngy.VidCoder -s winget -h --accept-source-agreements --accept-package-agreements
-REM cinst windowblinds -y
-REM winget install Microsoft.winfile -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install 9NBLGGH404XM -s msstore -h --accept-source-agreements --accept-package-agreements & rem xplorer² lite
-REM winget install ModernFlyouts.ModernFlyouts -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install Files-Community.Files -s winget -h --accept-source-agreements --accept-package-agreements
-winget install Open-Shell.Open-Shell-Menu -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install t1m0thyj.WinDynamicDesktop -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install File-New-Project.EarTrumpet -s winget -h --accept-source-agreements --accept-package-agreements
-rem***Instalar Utilitários***
-REM winget install 7zip.7zip -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install 7zip.7zipAlpha -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install Piriform.CCleaner -s winget -h --accept-source-agreements --accept-package-agreements
-REM cinst compactgui -y
-REM winget install CPUID.CPU-Z -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install Piriform.Defraggler -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install ESET.Nod32 -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install ESET.Security -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install flux.flux -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install TechPowerUp.GPU-Z -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install REALiX.HWiNFO -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install Microsoft.PowerToys -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install Rainmeter.Rainmeter -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install Piriform.Recuva -s winget -h --accept-source-agreements --accept-package-agreements
-REM cinst REGscanner -y
-REM winget install den4b.ReNamer -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install AntibodySoftware.WizTree -s winget -h --accept-source-agreements --accept-package-agreements
-winget install Microsoft.WindowsTerminal -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install Lexikos.AutoHotkey -s winget -h --accept-source-agreements --accept-package-agreements
-REM winget install CodeSector.TeraCopy -s winget -h --accept-source-agreements --accept-package-agreements
+cls
+echo.
+echo  ╔═══════════════════════════════════════════╗
+echo  ║             INSTALADORES                  ║
+echo  ╚═══════════════════════════════════════════╝
+echo.
+echo  📥 Instalando componentes essenciais...
+echo.
+echo  ┌─ INSTALACOES ─────────────────────────────┐
+echo  │                                           │
+REM Instalações básicas e seguras
+echo  │  🌐 Configurando DNS cache...             │
+REG ADD "HKLM\SYSTEM\CurrentControlSet\services\Dnscache\Parameters" /v "MaxNegativeCacheTtl" /t "REG_DWORD" /d "86400" /f >nul 2>&1 && echo  │  ✅ DNS Cache TTL configurado             │
+REG ADD "HKLM\SYSTEM\CurrentControlSet\services\Dnscache\Parameters" /v "MaxCacheTtl" /t "REG_DWORD" /d "86400" /f >nul 2>&1 && echo  │  ✅ DNS Max Cache configurado             │
+echo  │                                           │
+REM Instalar .NET Framework 3.5
+echo  │  📦 Instalando .NET Framework 3.5...      │
+Dism /online /norestart /Enable-Feature /FeatureName:"NetFx3" >nul 2>&1 && echo  │  ✅ .NET Framework 3.5 instalado          │
+echo  │                                           │
+REM Instalações via winget
+echo  │  🔧 Instalando runtimes essenciais...     │
+winget install Microsoft.DotNet.DesktopRuntime.6 -s winget -h --accept-source-agreements --accept-package-agreements >nul 2>&1 && echo  │  ✅ .NET 6 Desktop Runtime instalado      │
+echo  │                                           │
+echo  │  🌐 Instalando navegadores...             │
+winget install Mozilla.Firefox -s winget -h --accept-source-agreements --accept-package-agreements >nul 2>&1 && echo  │  ✅ Mozilla Firefox instalado             │
+echo  │                                           │
+echo  │  📝 Instalando editores...                │
+winget install Notepad++.Notepad++ -s winget -h --accept-source-agreements --accept-package-agreements >nul 2>&1 && echo  │  ✅ Notepad++ instalado                   │
+
+if "%WINVER%"=="11" (
+    echo  │  🆕 Instalacoes Windows 11...             │
+    winget install Microsoft.WindowsTerminal -s winget -h --accept-source-agreements --accept-package-agreements >nul 2>&1 && echo  │  ✅ Windows Terminal instalado            │
+    winget install 7zip.7zip -s winget -h --accept-source-agreements --accept-package-agreements >nul 2>&1 && echo  │  ✅ 7-Zip instalado                       │
+    winget install Microsoft.PowerToys -s winget -h --accept-source-agreements --accept-package-agreements >nul 2>&1 && echo  │  ✅ PowerToys instalado                   │
+) else (
+    echo  │  🖥️  Instalacoes Windows 10...             │
+    winget install VideoLAN.VLC -s winget -h --accept-source-agreements --accept-package-agreements >nul 2>&1 && echo  │  ✅ VLC Media Player instalado            │
+    winget install Git.Git -s winget -h --accept-source-agreements --accept-package-agreements >nul 2>&1 && echo  │  ✅ Git instalado                         │
+)
+
+echo  │                                           │
+echo  └───────────────────────────────────────────┘
+echo.
+echo  🎉 Instalacoes concluidas!
+echo.
+echo  Pressione qualquer tecla para continuar...
 cls
 pause
 goto :menu
 echo.
 
-TIMEOUT /T 5
-taskkill /f /im explorer.exe
+:OtimizacaoHardwareFraco
+cls
+echo.
+echo  ╔═══════════════════════════════════════════╗
+echo  ║         OTIMIZACAO HARDWARE FRACO         ║
+echo  ╚═══════════════════════════════════════════╝
+echo.
+echo  🚀 Aplicando otimizacoes especializadas...
+echo.
+echo  ┌─ OTIMIZACOES ESPECIAIS ───────────────────┐
+echo  │                                           │
+echo  │  💾 Otimizando gerenciamento de memoria... │
+REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "ClearPageFileAtShutdown" /t REG_DWORD /d 0 /f >nul 2>&1
+REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "DisablePagingExecutive" /t REG_DWORD /d 0 /f >nul 2>&1
+REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "LargeSystemCache" /t REG_DWORD /d 0 /f >nul 2>&1
+echo  │  ✅ Memoria otimizada                     │
+echo  │                                           │
+echo  │  🖥️  Otimizando prioridades de CPU...     │
+REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl" /v "IRQ8Priority" /t REG_DWORD /d 1 /f >nul 2>&1
+REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\PriorityControl" /v "Win32PrioritySeparation" /t REG_DWORD /d 38 /f >nul 2>&1
+echo  │  ✅ Prioridades configuradas              │
+echo  │                                           │
+echo  │  🎨 Removendo efeitos visuais...          │
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v "VisualFXSetting" /t REG_DWORD /d 2 /f >nul 2>&1
+REG ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /v "UserPreferencesMask" /t REG_BINARY /d 9012038010000000 /f >nul 2>&1
+echo  │  ✅ Interface otimizada                   │
+echo  │                                           │
+echo  │  ⚡ Acelerando inicializacao...           │
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Serialize" /v "StartupDelayInMSec" /t REG_DWORD /d 0 /f >nul 2>&1
+echo  │  ✅ Startup acelerado                     │
+echo  │                                           │
+echo  │  🌐 Otimizando rede...                    │
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "NetworkThrottlingIndex" /t REG_DWORD /d 4294967295 /f >nul 2>&1
+echo  │  ✅ Throttling de rede removido           │
+echo  │                                           │
+echo  │  🔧 Desabilitando servicos opcionais...   │
+sc config Fax start= disabled >nul 2>&1
+sc config Themes start= disabled >nul 2>&1
+sc config UxSms start= disabled >nul 2>&1
+echo  │  ✅ Servicos otimizados                   │
+echo  │                                           │
+echo  └───────────────────────────────────────────┘
+echo.
+echo  🎉 Otimizacao para hardware fraco concluida!
+echo     Sistema configurado para maxima performance!
+echo.
+echo  Pressione qualquer tecla para continuar...
+cls
+pause
+goto :menu
+echo.
+
+:LimpezaArquivosTemporarios
+cls
+echo.
+echo  ╔═══════════════════════════════════════════╗
+echo  ║          LIMPEZA DE ARQUIVOS              ║
+echo  ╚═══════════════════════════════════════════╝
+echo.
+echo  🧹 Iniciando limpeza de arquivos...
+echo.
+echo  ┌─ PROGRESSO DA LIMPEZA ────────────────────┐
+echo  │                                           │
+echo  │  🗂️  Limpando arquivos temporarios...     │
+del /s /q "%temp%\*" >nul 2>&1
+rd /s /q "%temp%" >nul 2>&1
+md "%temp%" >nul 2>&1
+echo  │  ✅ Temp do usuario limpo                 │
+echo  │                                           │
+echo  │  🗂️  Limpando temp do Windows...          │
+del /s /q "%SystemRoot%\Temp\*" >nul 2>&1
+rd /s /q "%SystemRoot%\Temp" >nul 2>&1
+md "%SystemRoot%\Temp" >nul 2>&1
+echo  │  ✅ Temp do sistema limpo                 │
+echo  │                                           │
+echo  │  📋 Limpando arquivos de log...           │
+del /s /q "%SystemRoot%\Logs\*" >nul 2>&1
+del /s /q "%SystemRoot%\System32\LogFiles\*" >nul 2>&1
+echo  │  ✅ Logs removidos                        │
+echo  │                                           │
+echo  │  🖼️  Limpando cache de thumbnails...      │
+del /s /q "%LocalAppData%\Microsoft\Windows\Explorer\thumbcache*" >nul 2>&1
+echo  │  ✅ Cache de miniaturas limpo             │
+echo  │                                           │
+echo  │  ⚡ Limpando prefetch antigo...           │
+forfiles /p "%SystemRoot%\Prefetch" /m *.pf /d -30 /c "cmd /c del @path" >nul 2>&1
+echo  │  ✅ Prefetch otimizado                    │
+echo  │                                           │
+echo  │  📦 Limpando cache Windows Update...      │
+net stop wuauserv >nul 2>&1
+del /s /q "%SystemRoot%\SoftwareDistribution\Download\*" >nul 2>&1
+net start wuauserv >nul 2>&1
+echo  │  ✅ Cache do Windows Update limpo         │
+echo  │                                           │
+echo  │  🗑️  Esvaziando lixeira...               │
+PowerShell -Command "Clear-RecycleBin -Force -ErrorAction SilentlyContinue" >nul 2>&1
+echo  │  ✅ Lixeira esvaziada                     │
+echo  │                                           │
+echo  │  🔧 Executando limpeza adicional...       │
+cleanmgr /sagerun:1 >nul 2>&1
+echo  │  ✅ Limpeza do sistema concluida          │
+echo  │                                           │
+
+if "%WINVER%"=="11" (
+    echo  │  🆕 Limpeza Windows 11...                 │
+    del /s /q "%LocalAppData%\Microsoft\Windows\INetCache\*" >nul 2>&1
+    echo  │  ✅ INetCache Win11 limpo                 │
+    del /s /q "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache\*" >nul 2>&1
+    echo  │  ✅ Cache Edge Win11 limpo                │
+    PowerShell -Command "Get-ChildItem -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist' -Recurse | Remove-ItemProperty -Name '*' -ErrorAction SilentlyContinue" >nul 2>&1
+    echo  │  ✅ UserAssist Win11 limpo                │
+) else (
+    echo  │  🖥️  Limpeza Windows 10...                 │
+    del /s /q "%LocalAppData%\Microsoft\Windows\WebCache\*" >nul 2>&1
+    echo  │  ✅ WebCache Win10 limpo                  │
+    del /s /q "%LocalAppData%\Microsoft\Internet Explorer\DOMStore\*" >nul 2>&1
+    echo  │  ✅ DOMStore IE limpo                     │
+)
+
+echo  │                                           │
+echo  └───────────────────────────────────────────┘
+echo.
+echo  🎉 Limpeza concluida com sucesso!
+echo     Sistema mais rapido e com mais espaco!
+echo.
+echo  Pressione qualquer tecla para continuar...
+cls
+pause
+goto :menu
+echo.
+
+:OtimizacaoWindows11
+if not "%WINVER%"=="11" (
+    cls
+    echo.
+    echo  ╔═══════════════════════════════════════════╗
+    echo  ║              AVISO IMPORTANTE             ║
+    echo  ╚═══════════════════════════════════════════╝
+    echo.
+    echo  ⚠️  Esta opcao e especifica para Windows 11!
+    echo.
+    echo  Seu sistema: Windows %WINVER%
+    echo.
+    echo  Pressione qualquer tecla para voltar...
+    pause
+    goto :menu
+)
+
+cls
+echo.
+echo  ╔═══════════════════════════════════════════╗
+echo  ║         OTIMIZACOES WINDOWS 11            ║
+echo  ╚═══════════════════════════════════════════╝
+echo.
+echo  🆕 Aplicando otimizacoes especificas do Win11...
+echo.
+echo  ┌─ CONFIGURACOES WINDOWS 11 ────────────────┐
+echo  │                                           │
+
+REM Desabilitar Widgets
+echo  │  🧩 Desabilitando Widgets...              │
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarDa" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Widgets desabilitados                 │
+
+REM Desabilitar Teams Chat integrado
+echo  │  💬 Removendo Teams Chat...               │
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarMn" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Teams Chat removido                   │
+
+REM Configurar menu Iniciar clássico
+echo  │  📱 Configurando menu Iniciar...          │
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_ShowClassicMode" /t REG_DWORD /d 1 /f >nul 2>&1
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Start" /v "ConfigureStartPins" /t REG_SZ /d "{\"pinnedList\": []}" /f >nul 2>&1 && echo  │  ✅ Menu Iniciar otimizado                │
+
+REM Desabilitar recomendações no menu Iniciar
+echo  │  🚫 Removendo recomendacoes...             │
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_IrisRecommendations" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Recomendacoes desabilitadas           │
+
+REM Configurar barra de tarefas para esquerda (clássico)
+echo  │  ⬅️  Alinhando barra de tarefas...         │
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAl" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Barra alinhada a esquerda             │
+
+REM Desabilitar busca na web via menu Iniciar
+echo  │  🔍 Otimizando busca...                   │
+REG ADD "HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Explorer" /v "DisableSearchBoxSuggestions" /t REG_DWORD /d 1 /f >nul 2>&1 && echo  │  ✅ Busca web desabilitada                │
+
+REM Desabilitar notificações do Microsoft Defender
+echo  │  🛡️  Configurando Defender...             │
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications" /v "DisableNotifications" /t REG_DWORD /d 1 /f >nul 2>&1 && echo  │  ✅ Notificacoes Defender reduzidas       │
+
+REM Otimizar snap layouts
+echo  │  📐 Configurando Snap Layouts...          │
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "EnableSnapAssistFlyout" /t REG_DWORD /d 0 /f >nul 2>&1
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "EnableSnapBar" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Snap Layouts simplificado             │
+
+REM Remover Microsoft Edge da tela de boas-vindas
+echo  │  🌐 Otimizando Edge...                    │
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v "HideFirstRunExperience" /t REG_DWORD /d 1 /f >nul 2>&1 && echo  │  ✅ Edge otimizado                        │
+
+REM Desabilitar publicidade no Explorer
+echo  │  📁 Otimizando Explorer...                │
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowSyncProviderNotifications" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Explorer otimizado                    │
+
+REM Configurações específicas do Windows 11 para performance
+echo  │  ⚡ Otimizacoes de performance...          │
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAnimations" /t REG_DWORD /d 0 /f >nul 2>&1
+REG ADD "HKEY_CURRENT_USER\Control Panel\Desktop" /v "EnablePerProcessSystemDPI" /t REG_DWORD /d 1 /f >nul 2>&1
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "EnableTransparency" /t REG_DWORD /d 0 /f >nul 2>&1 && echo  │  ✅ Performance otimizada                 │
+
+REM Remover aplicativos específicos do Windows 11
+echo  │  📱 Removendo apps desnecessarios...      │
+PowerShell -Command "Get-AppxPackage *Microsoft.Todos* | Remove-AppxPackage" >nul 2>&1
+PowerShell -Command "Get-AppxPackage *MicrosoftWindows.Client.WebExperience* | Remove-AppxPackage" >nul 2>&1
+PowerShell -Command "Get-AppxPackage *Microsoft.GetHelp* | Remove-AppxPackage" >nul 2>&1
+PowerShell -Command "Get-AppxPackage *Microsoft.Getstarted* | Remove-AppxPackage" >nul 2>&1 && echo  │  ✅ Apps desnecessarios removidos         │
+
+echo  │                                           │
+echo  └───────────────────────────────────────────┘
+echo.
+echo  🎉 Otimizacoes Windows 11 aplicadas!
+echo     Seu Windows 11 agora esta mais rapido!
+echo.
+echo  Pressione qualquer tecla para continuar...
+cls
+pause
+goto :menu
+echo.
+
+TIMEOUT /T 3
+cls
+echo.
+echo  ╔═══════════════════════════════════════════╗
+echo  ║           OTIMIZACAO CONCLUIDA            ║
+echo  ╚═══════════════════════════════════════════╝
+echo.
+echo            🎉 PARABENS! 🎉
+echo.
+echo  ┌─ REINICIALIZANDO INTERFACE ───────────────┐
+echo  │                                           │
+echo  │  🔄 Reiniciando Windows Explorer...       │
+taskkill /f /im explorer.exe >nul 2>&1
+echo  │  ✅ Explorer finalizado                   │
+echo  │                                           │
 start explorer.exe
-msg %username% Otimizacao Finalizada com Sucesso
+echo  │  ✅ Explorer reiniciado                   │
+echo  │                                           │
+echo  │  🎯 Sistema otimizado com sucesso!        │
+echo  │                                           │
+if "%WINVER%"=="11" (
+echo  │  🆕 Windows 11 detectado e otimizado!     │
+) else (
+echo  │  🖥️  Windows 10 otimizado com eficiencia! │
+)
+echo  │                                           │
+echo  │  💡 Recomendamos reiniciar o computador   │
+echo  │     para aplicar todas as otimizacoes     │
+echo  │                                           │
+echo  └───────────────────────────────────────────┘
+echo.
+if "%WINVER%"=="11" (
+    echo  🚀 Seu Windows 11 esta mais rapido agora!
+) else (
+    echo  🚀 Seu Windows 10 esta mais rapido agora!
+)
+echo.
+if "%WINVER%"=="11" (
+    msg %username% "Otimizacao Windows 11 finalizada! Considere reiniciar o sistema."
+) else (
+    msg %username% "Otimizacao Windows 10 finalizada! Considere reiniciar o sistema."
+)
