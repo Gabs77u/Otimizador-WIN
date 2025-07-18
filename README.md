@@ -1,57 +1,39 @@
-� Release v3.0.0
-✨ PRINCIPAIS FUNCIONALIDADES:
+v3.0.1 - Winbox Toolkit Optimization Edition
+� NOVA VERSÃO UNIFICADA v3.0.1
+✨ Funcionalidades principais:
 
-� OTIMIZADOR WINDOWS 10/11 v3.0:
-- ✅ Detecção automática de versão (Win 10/11)
-- ✅ Interface ASCII moderna com emojis
-- ✅ 16 módulos básicos + 1 exclusivo Win11
-- ✅ Feedback visual em tempo real
-- ✅ Suporte completo a builds 19041+ e 22000+
+� WINBOX TOOLKIT OPTIMIZATION:
+- ✅ Sistema unificado de otimização Windows 10/11
+- ✅ Interface moderna com ASCII art e emojis UTF-8
+- ✅ 6 módulos principais de otimização
+- ✅ Sistema robusto de debug e logs
+- ✅ Tratamento avançado de erros
+- ✅ Detecção automática de privilégios
+- ✅ Compatibilidade total Win 10/11
 
-� RAM CLEANER v3.0:
-- ✅ Modo não-administrador revolucionário
-- ✅ Sistema robusto de fallback (PowerShell/WMIC)
-- ✅ Monitor em tempo real com barras ASCII
-- ✅ 4 modos de limpeza adaptativos
-- ✅ Interface responsiva 80x25
+� SISTEMA DE TESTES:
+- ✅ Testes unitários completos
+- ✅ Testes de integração e performance
+- ✅ Testes automatizados abrangentes
+- ✅ Cobertura de todas as funcionalidades
 
-� DOCUMENTAÇÃO COMPLETA:
-- ✅ READMEs detalhados para ambos programas
-- ✅ Licença Creative Commons BY-NC 4.0
+� DOCUMENTAÇÃO ATUALIZADA:
+- ✅ README.md completo e detalhado
 - ✅ Termos de uso em português
+- ✅ Licença Creative Commons BY-NC 4.0
 - ✅ Estrutura de pastas organizada
 
-�️ LICENCIAMENTO:
-- ⚖️ Creative Commons Attribution-NonCommercial 4.0
-- ✅ Uso pessoal e educacional permitido
-- ❌ Uso comercial proibido sem autorização
-- � Atribuição obrigatória
+� MIGRAÇÃO DE FUNCIONALIDADES:
+- ✅ Integração das funcionalidades do RamCleaner
+- ✅ Otimizações avançadas de sistema
+- ✅ Gerenciamento de memória melhorado
+- ✅ Tweaks de privacidade e telemetria
 
-� COMPATIBILIDADE:
-- �️ Windows 10 (builds 19041-19045)
-- �️ Windows 11 (builds 22000+ incluindo Insider)
-- ⚡ PowerShell 5.0+ e WMIC como fallback
-- � Funciona com/sem privilégios administrativos
+⚡ MELHORIAS TÉCNICAS:
+- ✅ Sistema de logs de debug
+- ✅ Tratamento robusto de erros
+- ✅ Interface adaptativa
+- ✅ Performance otimizada
+- ✅ Validação de entrada melhorada
 
-� ESTRUTURA FINAL:
-- Otimizador WIN 10/ (Otimizador principal)
-- RamCleaner/ (Limpador de memória)
-- Docs/ (Documentação em ambas as pastas)
-- LICENSE e TERMOS_DE_USO.md (Em ambos)
-
-✅ QUALIDADE ASSEGURADA:
-- � Testado em múltiplas versões do Windows
-- � Operações seguras e reversíveis
-- � Performance otimizada
-- �� Interface moderna e intuitiva
-
-� DESTAQUES TÉCNICOS:
-- Detecção inteligente de sistema
-- Fallback automático entre métodos
-- Interface adaptativa baseada em privilégios
-- Monitoramento em tempo real
-- Barras de progresso ASCII coloridas
-- Sistema robusto de error handling
-
-© 2025 Gabs77u - Todos os direitos reservados
-Licenciado sob CC BY-NC 4.0
+© 2025 Gabs77u - CC BY-NC 4.0
